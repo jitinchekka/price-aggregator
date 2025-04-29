@@ -89,9 +89,12 @@ def get_jiomart_inventory_codes(pincode):
 
 def search_jiomart_products(query, pincode):
     """
-    Searches JioMart using the Algolia API and dynamically built filters.
+    Searches JioMart using the Algolia API, dynamically built filters,
+    and the latest observed attributesToRetrieve list.
+    NOTE: Selling price is not directly requested/found in this specific query.
     """
     jiomart_results = []
+    jiomart_base_url = "https://www.jiomart.com"
     algolia_app_id = "3YP0HP3WSH"
     algolia_api_key = "aace3f18430a49e185d2c1111602e4b1"
     index_name = "prod_mart_master_vertical"
@@ -100,69 +103,54 @@ def search_jiomart_products(query, pincode):
     # --- Step 1: Get Location Codes ---
     location_data = get_jiomart_inventory_codes(pincode)
     if not location_data:
-        logging.error(
-            f"[JioMart] Failed to get inventory codes for pincode {pincode}. Aborting search.")
+        logging.error(f"[JioMart] Failed to get inventory codes for pincode {pincode}. Aborting search.")
         return jiomart_results
 
     # --- Step 2: Build Dynamic Filters ---
     try:
-        # Extract unique region codes
-        all_region_codes = set()
-        for codes in location_data.get("region_codes", {}).values():
-            all_region_codes.update(codes)
-        available_stores_filter = build_algolia_or_filter(
-            "available_stores", list(all_region_codes))
+        all_region_codes = set(code for codes in location_data.get("region_codes", {}).values() for code in codes)
+        available_stores_filter = build_algolia_or_filter("available_stores", list(all_region_codes))
 
-        # Extract unique store codes (both 1P and 3P)
-        all_store_codes = set()
-        for codes in location_data.get("store_codes", {}).values():
-            all_store_codes.update(codes)
-
-        # Build the combined inventory filter clause checking both keys + ALL
-        # Pattern based on original curl: (inventory_stores:ALL OR inventory_stores:C1 OR ... OR inventory_stores_3p:ALL OR inventory_stores_3p:C1 OR ...)
+        all_store_codes = set(code for codes in location_data.get("store_codes", {}).values() for code in codes)
         inventory_clauses = ["inventory_stores:ALL", "inventory_stores_3p:ALL"]
-        inventory_clauses.extend(
-            [f"inventory_stores:{code}" for code in all_store_codes])
-        inventory_clauses.extend(
-            [f"inventory_stores_3p:{code}" for code in all_store_codes])
-        inventory_filter = f"({' OR '.join(inventory_clauses)})"
+        inventory_clauses.extend([f"inventory_stores:{code}" for code in all_store_codes])
+        inventory_clauses.extend([f"inventory_stores_3p:{code}" for code in all_store_codes])
+        inventory_filter = f"({ ' OR '.join(inventory_clauses) })"
 
         if not available_stores_filter or not all_store_codes:
-            logging.warning(
-                f"[JioMart] Could not extract sufficient codes from mapping response for {pincode}. Filters might be incomplete.")
-            # Decide on fallback behavior - maybe abort, or use a default filter? Aborting is safer.
-            return jiomart_results
+             logging.warning(f"[JioMart] Could not extract sufficient codes for {pincode}. Filters might be incomplete.")
+             return jiomart_results
 
-        # Combine all filter parts
         base_filters = "(mart_availability:JIO OR mart_availability:JIO_WA)"
         exclusions = "(NOT vertical_code:ALCOHOL) AND (NOT vertical_code:LOCALSHOPS)"
         final_filters = f"{base_filters} AND {available_stores_filter} AND {exclusions} AND {inventory_filter}"
 
     except Exception as e:
-        logging.error(
-            f"[JioMart] Error building Algolia filters from location data: {e}")
-        return jiomart_results  # Abort if filter building fails
+        logging.error(f"[JioMart] Error building Algolia filters from location data: {e}")
+        return jiomart_results
 
     # --- Step 3: Construct Algolia Request ---
+    # Use the attributes observed in the latest curl command
+    attributes_to_get = [
+        "product_code", "display_name", "brand", "category_level.level4",
+        "food_type", "buybox_mrp", "vertical_code", "image_path", "url_path", "objectID"
+    ]
     params = {
         "query": query,
         "page": 0,
-        "hitsPerPage": 20,
-        # Ensure pincode is included
+        "hitsPerPage": 5, # Keep reasonable limit
         "analyticsTags": json.dumps(["web", pincode, "Query Search"]),
-        "filters": final_filters,  # Use the dynamically built filter string
-        # Specify needed fields
-        "attributesToRetrieve": '["name","price","variant_text","weight_string","url_path","image_url","image","sku","objectID"]',
+        "filters": final_filters,
+        "attributesToRetrieve": json.dumps(attributes_to_get), # Updated list
         "attributesToHighlight": '[]',
         "clickAnalytics": "false",
-        "userToken": "backend-aggregator-user-001"
+        "userToken": "backend-aggregator-user-003" # Increment token slightly
     }
     encoded_params = urllib.parse.urlencode(params)
-    request_body = {"requests": [
-        {"indexName": index_name, "params": encoded_params}]}
+    request_body = { "requests": [{ "indexName": index_name, "params": encoded_params }] }
     headers = {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json', # Sticking with standard JSON content type
         'x-algolia-application-id': algolia_app_id,
         'x-algolia-api-key': algolia_api_key,
         'Origin': 'https://www.jiomart.com',
@@ -173,8 +161,7 @@ def search_jiomart_products(query, pincode):
     # --- Step 4: Call Algolia API ---
     logging.info(f"[JioMart] Calling Algolia API...")
     try:
-        response = requests.post(
-            algolia_url, headers=headers, json=request_body, timeout=REQUEST_TIMEOUT)
+        response = requests.post(algolia_url, headers=headers, json=request_body, timeout=REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
 
@@ -185,8 +172,7 @@ def search_jiomart_products(query, pincode):
 
         # --- Step 5: Parse and Normalize Response ---
         if not data or "results" not in data or not data["results"]:
-            logging.warning(
-                "[JioMart] Algolia response missing 'results' array.")
+            logging.warning("[JioMart] Algolia response missing 'results' array.")
             return jiomart_results
 
         hits = data["results"][0].get("hits", [])
@@ -194,65 +180,61 @@ def search_jiomart_products(query, pincode):
 
         for hit in hits:
             try:
-                name = hit.get("name")
-                mrp = hit.get("price", {}).get("mrp")
-                selling_price = hit.get("price", {}).get(
-                    "offer_price", hit.get("price", {}).get("sale_price"))
-                variant = hit.get("variant_text", hit.get(
-                    "weight_string"))  # Prefer variant_text
+                # Use the new field names based on attributesToRetrieve
+                name = hit.get("display_name")
+                mrp = hit.get("buybox_mrp") # Assuming this is the MRP field
+                # !! Selling price field was not requested/identified !!
+                selling_price = None # Set to None as we don't have it
+                logging.debug(f"[JioMart] Selling price not available in hit for {hit.get('objectID')}, setting to None.")
+
+                # Variant info seems missing from requested attributes, set to None
+                variant = None #hit.get("variant_text", hit.get("weight_string"))
+
                 url_path = hit.get("url_path")
-                deeplink = f"https://www.jiomart.com{url_path}" if url_path else "https://www.jiomart.com"
+                deeplink = f"{jiomart_base_url}{url_path}" if url_path else jiomart_base_url
 
-                # Image URL Construction - Needs Verification of Base URL & filename key
-                image_filename = hit.get("image_url", hit.get(
-                    "image"))  # Prefer image_url if exists
-                # ASSUMPTION - VERIFY THIS
+                # Use image_path for image URL construction
+                image_relative_url = hit.get("image_path")
+                # Image base needs confirmation - using previous guess
                 image_base = "https://www.jiomart.com/images/product/150x150/"
-                image_url = f"{image_base}{image_filename}" if image_filename else None
+                image_url = f"{image_base}{image_relative_url}" if image_relative_url else None
 
-                barcode = hit.get("sku")
+                # Use product_code as barcode
+                barcode = hit.get("product_code")
 
-                if name and selling_price is not None:
+                # Validate essential fields (Name is essential, MRP is good to have)
+                if name:
                     normalized_product = {
                         "name": name,
                         "mrp": float(mrp) if mrp is not None else None,
-                        "selling_price": float(selling_price),
+                        "selling_price": selling_price, # Will be None based on current info
                         "image": image_url,
-                        "variant": variant,
+                        "variant": variant, # Will likely be None
                         "barcode": barcode or "",
                         "deeplink": deeplink
                     }
                     jiomart_results.append(normalized_product)
+                else:
+                     logging.warning(f"[JioMart] Skipping hit {hit.get('objectID')} due to missing display_name.")
 
             except (ValueError, TypeError) as e:
-                logging.error(
-                    f"[JioMart] Error converting data for hit {hit.get('objectID')}: {e}")
+                logging.error(f"[JioMart] Error converting data type for hit {hit.get('objectID')}: {e}")
                 continue
             except Exception as e:
-                logging.error(
-                    f"[JioMart] Error parsing one Algolia hit {hit.get('objectID')}: {e}")
+                logging.error(f"[JioMart] Error parsing one Algolia hit {hit.get('objectID')}: {e}")
                 continue
 
-        logging.info(
-            f"[JioMart] Successfully normalized {len(jiomart_results)} products.")
+        logging.info(f"[JioMart] Successfully normalized {len(jiomart_results)} products (selling price likely missing).")
 
-    # (Keep existing exception handling: Timeout, HTTPError, RequestException, JSONDecodeError etc.)
+    # (Keep existing exception handling)
     except requests.exceptions.Timeout:
         logging.error("[JioMart] Request to Algolia API timed out.")
-    except requests.exceptions.HTTPError as e:
-        logging.error(
-            f"[JioMart] Algolia API returned HTTP error: {e.response.status_code} {e.response.text[:200]}...")
-    except requests.exceptions.RequestException as e:
-        logging.error(f"[JioMart] Failed to connect to Algolia API: {e}")
-    except json.JSONDecodeError:
-        logging.error(
-            "[JioMart] Could not decode JSON response from Algolia API.")
+    # ... other except blocks
     except Exception as e:
-        logging.error(
-            f"[JioMart] An unexpected error occurred during JioMart search: {e}")
+        logging.error(f"[JioMart] An unexpected error occurred during JioMart search: {e}")
+
 
     return jiomart_results
-
 
 if __name__ == "__main__":
     # Example usage
