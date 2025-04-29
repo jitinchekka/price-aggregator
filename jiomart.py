@@ -55,6 +55,12 @@ def get_jiomart_inventory_codes(pincode):
             mapping_url, headers=headers, timeout=REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
+
+        # Save the response for debugging
+        with open("jiomart_mapping_response.json", "w") as f:
+            json.dump(data, f, indent=4)
+        logging.info(
+            f"[JioMart Mapping] API response saved to jiomart_mapping_response.json")
         # Basic validation of response structure
         if "region_codes" in data and "store_codes" in data:
             logging.info(
@@ -85,6 +91,8 @@ def get_jiomart_inventory_codes(pincode):
         return None
 
 # --- Updated JioMart Search Function ---
+
+
 def search_jiomart_products(query, pincode):
     """
     Searches JioMart using Algolia, dynamic filters, and parses the
@@ -100,38 +108,46 @@ def search_jiomart_products(query, pincode):
     # --- Step 1: Get Location Codes ---
     location_data = get_jiomart_inventory_codes(pincode)
     if not location_data:
-        logging.error(f"[JioMart] Failed to get inventory codes for pincode {pincode}. Aborting search.")
+        logging.error(
+            f"[JioMart] Failed to get inventory codes for pincode {pincode}. Aborting search.")
         return jiomart_results
 
     # --- Step 2: Build Dynamic Filters ---
     try:
         # Extract unique region codes (used in available_stores filter)
-        all_region_codes = set(code for codes in location_data.get("region_codes", {}).values() for code in codes)
-        available_stores_filter = build_algolia_or_filter("available_stores", list(all_region_codes))
+        all_region_codes = set(code for codes in location_data.get(
+            "region_codes", {}).values() for code in codes)
+        available_stores_filter = build_algolia_or_filter(
+            "available_stores", list(all_region_codes))
 
         # Extract unique store codes (used to find relevant price AND in inventory filter)
-        all_store_codes = set(code for codes in location_data.get("store_codes", {}).values() for code in codes)
+        all_store_codes = set(code for codes in location_data.get(
+            "store_codes", {}).values() for code in codes)
 
         # Build the combined inventory filter clause
         inventory_clauses = ["inventory_stores:ALL", "inventory_stores_3p:ALL"]
-        inventory_clauses.extend([f"inventory_stores:{code}" for code in all_store_codes])
-        inventory_clauses.extend([f"inventory_stores_3p:{code}" for code in all_store_codes])
-        inventory_filter = f"({ ' OR '.join(inventory_clauses) })"
+        inventory_clauses.extend(
+            [f"inventory_stores:{code}" for code in all_store_codes])
+        inventory_clauses.extend(
+            [f"inventory_stores_3p:{code}" for code in all_store_codes])
+        inventory_filter = f"({' OR '.join(inventory_clauses)})"
 
         if not available_stores_filter or not all_store_codes:
-             logging.warning(f"[JioMart] Could not extract sufficient codes for {pincode}. Filters might be incomplete.")
-             return jiomart_results # Abort
+            logging.warning(
+                f"[JioMart] Could not extract sufficient codes for {pincode}. Filters might be incomplete.")
+            return jiomart_results  # Abort
 
         base_filters = "(mart_availability:JIO OR mart_availability:JIO_WA)"
         exclusions = "(NOT vertical_code:ALCOHOL) AND (NOT vertical_code:LOCALSHOPS)"
         final_filters = f"{base_filters} AND {available_stores_filter} AND {exclusions} AND {inventory_filter}"
 
     except Exception as e:
-        logging.error(f"[JioMart] Error building Algolia filters from location data: {e}")
+        logging.error(
+            f"[JioMart] Error building Algolia filters from location data: {e}")
         return jiomart_results
 
     # --- Step 3: Construct Algolia Request ---
-    attributes_to_get = [ # Request fields based on sample response and previous findings
+    attributes_to_get = [  # Request fields based on sample response and previous findings
         "product_code", "display_name", "brand", "category_level.level4",
         "buybox_mrp", "vertical_code", "image_path", "url_path", "objectID"
         # Note: variant_text/weight_string seem missing from actual data, even if requested
@@ -145,7 +161,8 @@ def search_jiomart_products(query, pincode):
         "userToken": "backend-aggregator-user-004"
     }
     encoded_params = urllib.parse.urlencode(params)
-    request_body = { "requests": [{ "indexName": index_name, "params": encoded_params }] }
+    request_body = {"requests": [
+        {"indexName": index_name, "params": encoded_params}]}
     headers = {
         'Accept': 'application/json', 'Content-Type': 'application/json',
         'x-algolia-application-id': algolia_app_id, 'x-algolia-api-key': algolia_api_key,
@@ -156,13 +173,15 @@ def search_jiomart_products(query, pincode):
     # --- Step 4: Call Algolia API ---
     logging.info(f"[JioMart] Calling Algolia API...")
     try:
-        response = requests.post(algolia_url, headers=headers, json=request_body, timeout=REQUEST_TIMEOUT)
+        response = requests.post(
+            algolia_url, headers=headers, json=request_body, timeout=REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
 
         # --- Step 5: Parse and Normalize Response ---
         if not data or "results" not in data or not data["results"]:
-            logging.warning("[JioMart] Algolia response missing 'results' array.")
+            logging.warning(
+                "[JioMart] Algolia response missing 'results' array.")
             return jiomart_results
 
         hits = data["results"][0].get("hits", [])
@@ -171,7 +190,8 @@ def search_jiomart_products(query, pincode):
         for hit in hits:
             try:
                 name = hit.get("display_name")
-                buybox_mrp_data = hit.get("buybox_mrp", {}) # Get the price object
+                buybox_mrp_data = hit.get(
+                    "buybox_mrp", {})  # Get the price object
 
                 # Find the correct price/mrp based on relevant store codes
                 mrp_num = None
@@ -182,64 +202,78 @@ def search_jiomart_products(query, pincode):
                 for store_code in all_store_codes:
                     if store_code in buybox_mrp_data:
                         price_info = buybox_mrp_data[store_code]
-                        if price_info and price_info.get("available"): # Check if available for this store
-                            mrp_num = float(price_info.get("mrp")) if price_info.get("mrp") is not None else None
-                            selling_price_num = float(price_info.get("price")) if price_info.get("price") is not None else None
-                            if selling_price_num is not None: # Found a valid price
+                        # Check if available for this store
+                        if price_info and price_info.get("available"):
+                            mrp_num = float(price_info.get("mrp")) if price_info.get(
+                                "mrp") is not None else None
+                            selling_price_num = float(price_info.get("price")) if price_info.get(
+                                "price") is not None else None
+                            if selling_price_num is not None:  # Found a valid price
                                 found_price = True
-                                break # Use the first relevant store's price
+                                break  # Use the first relevant store's price
 
                 # Fallback: If no specific store code matched, try broader region codes present in buybox_mrp keys?
                 # Or just use the first available price if any? Let's try using the first available price.
                 if not found_price and buybox_mrp_data:
                     for key, price_info in buybox_mrp_data.items():
-                         if price_info and price_info.get("available"):
-                             mrp_num = float(price_info.get("mrp")) if price_info.get("mrp") is not None else None
-                             selling_price_num = float(price_info.get("price")) if price_info.get("price") is not None else None
-                             if selling_price_num is not None:
-                                 logging.debug(f"[JioMart] Using fallback price from key '{key}' for {hit.get('objectID')}")
-                                 found_price = True
-                                 break
+                        if price_info and price_info.get("available"):
+                            mrp_num = float(price_info.get("mrp")) if price_info.get(
+                                "mrp") is not None else None
+                            selling_price_num = float(price_info.get("price")) if price_info.get(
+                                "price") is not None else None
+                            if selling_price_num is not None:
+                                logging.debug(
+                                    f"[JioMart] Using fallback price from key '{key}' for {hit.get('objectID')}")
+                                found_price = True
+                                break
 
-                variant = None # Variant info seems missing
+                variant = None  # Variant info seems missing
                 url_path = hit.get("url_path")
                 deeplink = f"{jiomart_base_url}{url_path}" if url_path else jiomart_base_url
 
                 image_relative_url = hit.get("image_path")
                 image_url = f"{jiomart_base_url}/images/product/original/{image_relative_url}?im=Resize=(150,150)" if image_relative_url else None
-                barcode = hit.get("product_code") # Using product_code as barcode
+                # Using product_code as barcode
+                barcode = hit.get("product_code")
 
-                if name and selling_price_num is not None: # Check if we found a name and a selling price
+                if name and selling_price_num is not None:  # Check if we found a name and a selling price
                     normalized_product = {
                         "name": name,
-                        "mrp": mrp_num, # Already float or None
-                        "selling_price": selling_price_num, # Already float
+                        "mrp": mrp_num,  # Already float or None
+                        "selling_price": selling_price_num,  # Already float
                         "image": image_url,
-                        "variant": variant, # Likely None
-                        "barcode": str(barcode) if barcode else "", # Convert to string
+                        "variant": variant,  # Likely None
+                        # Convert to string
+                        "barcode": str(barcode) if barcode else "",
                         "deeplink": deeplink
                     }
                     jiomart_results.append(normalized_product)
                 else:
-                     logging.warning(f"[JioMart] Skipping hit {hit.get('objectID')} due to missing name or price data in buybox_mrp for relevant stores.")
+                    logging.warning(
+                        f"[JioMart] Skipping hit {hit.get('objectID')} due to missing name or price data in buybox_mrp for relevant stores.")
 
             except (ValueError, TypeError) as e:
-                logging.error(f"[JioMart] Error converting data type for hit {hit.get('objectID')}: {e}")
+                logging.error(
+                    f"[JioMart] Error converting data type for hit {hit.get('objectID')}: {e}")
                 continue
             except Exception as e:
-                logging.error(f"[JioMart] Error parsing one Algolia hit {hit.get('objectID')}: {e}")
+                logging.error(
+                    f"[JioMart] Error parsing one Algolia hit {hit.get('objectID')}: {e}")
                 continue
 
-        logging.info(f"[JioMart] Successfully normalized {len(jiomart_results)} products.")
+        logging.info(
+            f"[JioMart] Successfully normalized {len(jiomart_results)} products.")
 
     # (Keep existing exception handling)
     except requests.exceptions.RequestException as e:
         logging.error(f"[JioMart] Algolia API call failed: {e}")
     # ... other except blocks
     except Exception as e:
-        logging.error(f"[JioMart] An unexpected error occurred during JioMart search: {e}")
+        logging.error(
+            f"[JioMart] An unexpected error occurred during JioMart search: {e}")
 
     return jiomart_results
+
 
 if __name__ == "__main__":
     # Example usage
