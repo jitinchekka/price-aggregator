@@ -4,6 +4,7 @@ import json
 from flask import Flask, request, jsonify
 from concurrent.futures import ThreadPoolExecutor
 import logging # Added for better logging
+from jiomart import search_jiomart_products
 
 # --- Configuration & Constants ---
 DMART_BASE_URL = "https://www.dmart.in"
@@ -255,6 +256,7 @@ def search_all_platforms():
         future_zepto = executor.submit(search_zepto_products, query, pincode)
         future_blinkit = executor.submit(search_blinkit_products, query, pincode)
         future_dmart = executor.submit(search_dmart_products, query, pincode)
+        future_jiomart = executor.submit(search_jiomart_products, query, pincode)
         logging.info("Tasks submitted.")
 
         # Wait for completion and retrieve results safely
@@ -282,6 +284,10 @@ def search_all_platforms():
         except Exception as e:
             logging.error(f"Exception retrieving DMart results: {e}")
             results["dmart_products"] = []
+            
+        try: results["jiomart_products"] = future_jiomart.result()
+        except Exception as e: logging.error(f"Exception retrieving JioMart results: {e}"); results["jiomart_products"] = []
+
 
     logging.info("All searches completed or timed out.")
 
@@ -290,7 +296,8 @@ def search_all_platforms():
         "instamart_products": results.get("instamart_products", []),
         "zepto_products": results.get("zepto_products", []),
         "blinkit_products": results.get("blinkit_products", []),
-        "dmart_products": results.get("dmart_products", [])
+        "dmart_products": results.get("dmart_products", []),
+        "jiomart_products": results.get("jiomart_products", [])
     }
 
     logging.info(f"Returning combined results. Instamart: {len(final_response['instamart_products'])}, Zepto: {len(final_response['zepto_products'])}, Blinkit: {len(final_response['blinkit_products'])}, DMart: {len(final_response['dmart_products'])}")

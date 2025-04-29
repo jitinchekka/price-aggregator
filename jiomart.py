@@ -275,9 +275,9 @@ def search_jiomart_products(query, pincode):
     return jiomart_results
 
 
-if __name__ == "__main__":
-    # Example usage
-    pincode = "500049"  # Replace with a valid pincode
-    query = "milk"  # Replace with a search term
-    results = search_jiomart_products(query, pincode)
-    print(json.dumps(results, indent=2))
+# if __name__ == "__main__":
+#     # Example usage
+#     pincode = "500049"  # Replace with a valid pincode
+#     query = "milk"  # Replace with a search term
+#     results = search_jiomart_products(query, pincode)
+#     print(json.dumps(results, indent=2))
