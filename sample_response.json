@@ -1,0 +1,833 @@
+{
+    "blinkit_products": [
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://cdn.grofers.com/app/images/products/sliding_image/524368a.jpg",
+            "mrp": 430.0,
+            "name": "Henko Top Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 344.0,
+            "super_saver_selling_price": null,
+            "variant": "2 ltr"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://cdn.grofers.com/da/cms-assets/cms/product/4154351d-0260-4b6a-87cf-3901c3f75ffe.jpg?ts=1734680559",
+            "mrp": 765.0,
+            "name": "Henko Matic Front Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 399.0,
+            "super_saver_selling_price": null,
+            "variant": "3.2 ltr"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://cdn.grofers.com/app/images/products/sliding_image/524367a.jpg",
+            "mrp": 490.0,
+            "name": "Henko Front Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 392.0,
+            "super_saver_selling_price": null,
+            "variant": "2 ltr"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://cdn.grofers.com/app/assets/products/sliding_images/jpeg/351b76ba-9bec-44c3-8752-8f63912fb553.jpg?ts=1723195264",
+            "mrp": 600.0,
+            "name": "Henko Matic Lintelligent Front Load Detergent Powder",
+            "price_normalized": null,
+            "selling_price": 372.0,
+            "super_saver_selling_price": null,
+            "variant": "2 kg"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://cdn.grofers.com/app/assets/products/sliding_images/jpeg/5b2e6147-c24a-4e87-9e9a-1a0e73ff6723.jpg",
+            "mrp": 499.0,
+            "name": "Full Houz Perforated Dustbin (Stainless Steel, Silver)",
+            "price_normalized": null,
+            "selling_price": 279.0,
+            "super_saver_selling_price": null,
+            "variant": "1 unit"
+        }
+    ],
+    "dmart_products": [
+        {
+            "barcode": "150005871",
+            "deeplink": "https://www.dmart.in/pdp/1418522",
+            "image": "https://cdn.dmart.in/images/products/NOV150005871xx2NOV23_5_P.jpg",
+            "mrp": 430.0,
+            "name": "Henko Matic Lintelligent Top Load Liquid Detergent Pouch",
+            "selling_price": 269.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150005872",
+            "deeplink": "https://www.dmart.in/pdp/1418523",
+            "image": "https://cdn.dmart.in/images/products/NOV150005872xx2NOV23_5_P.jpg",
+            "mrp": 490.0,
+            "name": "Henko Matic Lintelligent Front Load Liquid Detergent Pouch",
+            "selling_price": 307.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150003256",
+            "deeplink": "https://www.dmart.in/pdp/425513",
+            "image": "https://cdn.dmart.in/images/products/FEB150003256xx14FEB24_5_P.jpg",
+            "mrp": 540.0,
+            "name": "Henko Matic Lintelligent Top Load Powder",
+            "selling_price": 349.0,
+            "variant": "2 kg"
+        },
+        {
+            "barcode": "150001149",
+            "deeplink": "https://www.dmart.in/pdp/49020",
+            "image": "https://cdn.dmart.in/images/products/FEB150001149xx29FEB24_5_P.jpg",
+            "mrp": 150.0,
+            "name": "Surf Excel Matic Liquid Detergent Front Load Pouch",
+            "selling_price": 136.0,
+            "variant": "500 ml"
+        },
+        {
+            "barcode": "150000480",
+            "deeplink": "https://www.dmart.in/pdp/49020",
+            "image": "https://cdn.dmart.in/images/products/MAY150000480xx22MAY24_5_P.jpg",
+            "mrp": 255.0,
+            "name": "Surf Excel Matic Liquid Detergent Front Load Pouch",
+            "selling_price": 235.0,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "150006493",
+            "deeplink": "https://www.dmart.in/pdp/49020",
+            "image": "https://cdn.dmart.in/images/products/MAY150006493xx6MAY24_5_P.jpg",
+            "mrp": 885.0,
+            "name": "Surf Excel Matic Liquid Detergent Front Load Pouch",
+            "selling_price": 530.0,
+            "variant": "4 L"
+        },
+        {
+            "barcode": "150007185",
+            "deeplink": "https://www.dmart.in/pdp/1616026",
+            "image": "https://cdn.dmart.in/images/products/AUG150007185xx9AUG24_5_P.jpg",
+            "mrp": 505.0,
+            "name": "Tide Matic Front Load Liquid Detergent",
+            "selling_price": 354.0,
+            "variant": "3.2 L"
+        },
+        {
+            "barcode": "150006900",
+            "deeplink": "https://www.dmart.in/pdp/1598819",
+            "image": "https://cdn.dmart.in/images/products/JUL150006900xx4JUL24_5_P.jpg",
+            "mrp": 345.0,
+            "name": "Rin Matic Front Load Liquid Detergent",
+            "selling_price": 240.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150000485",
+            "deeplink": "https://www.dmart.in/pdp/49021",
+            "image": "https://cdn.dmart.in/images/products/FEB150000485xx29FEB24_5_P.jpg",
+            "mrp": 135.0,
+            "name": "Surf Excel Top Load Matic Liquid",
+            "selling_price": 125.0,
+            "variant": "500 ml"
+        },
+        {
+            "barcode": "150000481",
+            "deeplink": "https://www.dmart.in/pdp/49021",
+            "image": "https://cdn.dmart.in/images/products/JUL150000481xx11JUL24_5_P.jpg",
+            "mrp": 225.0,
+            "name": "Surf Excel Top Load Matic Liquid",
+            "selling_price": 209.0,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "150001009",
+            "deeplink": "https://www.dmart.in/pdp/49021",
+            "image": "https://cdn.dmart.in/images/products/JUN150001009xx24JUN24_5_P.jpg",
+            "mrp": 420.0,
+            "name": "Surf Excel Top Load Matic Liquid",
+            "selling_price": 250.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150006492",
+            "deeplink": "https://www.dmart.in/pdp/49021",
+            "image": "https://cdn.dmart.in/images/products/MAY150006492xx6MAY24_5_P.jpg",
+            "mrp": 795.0,
+            "name": "Surf Excel Top Load Matic Liquid",
+            "selling_price": 465.0,
+            "variant": "4 L"
+        },
+        {
+            "barcode": "150006622",
+            "deeplink": "https://www.dmart.in/pdp/1586546",
+            "image": "https://cdn.dmart.in/images/products/JUN150006622xx6JUN24_5_P.jpg",
+            "mrp": 330.0,
+            "name": "Star Bright Matic Liquid Detergent Top Load",
+            "selling_price": 199.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150006623",
+            "deeplink": "https://www.dmart.in/pdp/1586547",
+            "image": "https://cdn.dmart.in/images/products/JUN150006623xx6JUN24_5_P.jpg",
+            "mrp": 370.0,
+            "name": "Star Bright Matic Liquid Detergent Front Load",
+            "selling_price": 210.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150004667",
+            "deeplink": "https://www.dmart.in/pdp/1157002",
+            "image": "https://cdn.dmart.in/images/products/JAN150004667xx30JAN24_5_P.jpg",
+            "mrp": 380.0,
+            "name": "Tide Matic Liquid Detergent Top Load",
+            "selling_price": 228.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150005173",
+            "deeplink": "https://www.dmart.in/pdp/1291501",
+            "image": "https://cdn.dmart.in/images/products/MAY150005173xx16MAY24_5_P.jpg",
+            "mrp": 290.0,
+            "name": "Godrej Genteel Matic Liquid Detergent Top Load",
+            "selling_price": 230.0,
+            "variant": "2 kg"
+        },
+        {
+            "barcode": "150002679",
+            "deeplink": "https://www.dmart.in/pdp/780541",
+            "image": "https://cdn.dmart.in/images/products/OCT150002679xx29OCT24_5_P.jpg",
+            "mrp": 225.0,
+            "name": "Ariel Matic Top Load Liquid Detergent",
+            "selling_price": 210.0,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "150003266",
+            "deeplink": "https://www.dmart.in/pdp/780541",
+            "image": "https://cdn.dmart.in/images/products/OCT150003266xx29OCT24_5_P.jpg",
+            "mrp": 319.0,
+            "name": "Ariel Matic Top Load Liquid Detergent",
+            "selling_price": 290.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150007187",
+            "deeplink": "https://www.dmart.in/pdp/780541",
+            "image": "https://cdn.dmart.in/images/products/OCT150007187xx29OCT24_5_P.jpg",
+            "mrp": 809.0,
+            "name": "Ariel Matic Top Load Liquid Detergent",
+            "selling_price": 579.0,
+            "variant": "4 L"
+        },
+        {
+            "barcode": "150002677",
+            "deeplink": "https://www.dmart.in/pdp/780539",
+            "image": "https://cdn.dmart.in/images/products/OCT150002677xx29OCT24_5_P.jpg",
+            "mrp": 259.0,
+            "name": "Ariel Matic Front Load Liquid Detergent",
+            "selling_price": 240.0,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "150003267",
+            "deeplink": "https://www.dmart.in/pdp/780539",
+            "image": "https://cdn.dmart.in/images/products/OCT150003267xx29OCT24_5_P.jpg",
+            "mrp": 364.0,
+            "name": "Ariel Matic Front Load Liquid Detergent",
+            "selling_price": 310.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150007186",
+            "deeplink": "https://www.dmart.in/pdp/780539",
+            "image": "https://cdn.dmart.in/images/products/OCT150007186xx29OCT24_5_P.jpg",
+            "mrp": 899.0,
+            "name": "Ariel Matic Front Load Liquid Detergent",
+            "selling_price": 575.0,
+            "variant": "4 L"
+        },
+        {
+            "barcode": "150007226",
+            "deeplink": "https://www.dmart.in/pdp/1616070",
+            "image": "https://cdn.dmart.in/images/products/AUG150007184xx9AUG24_5_P.jpg",
+            "mrp": 449.0,
+            "name": "Tide Matic Top Load Liquid Detergent",
+            "selling_price": 319.0,
+            "variant": "3.2 L"
+        },
+        {
+            "barcode": "150004666",
+            "deeplink": "https://www.dmart.in/pdp/1184003",
+            "image": "https://cdn.dmart.in/images/products/JAN150004666xx30JAN24_5_P.jpg",
+            "mrp": 430.0,
+            "name": "Tide Matic Front Load Liquid Detergent",
+            "selling_price": 385.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150006036",
+            "deeplink": "https://www.dmart.in/pdp/1463009",
+            "image": "https://cdn.dmart.in/images/products/JAN150006036xx22JAN24_5_P.jpg",
+            "mrp": 399.0,
+            "name": "BECO Natural Laundry Liquid - Top Load",
+            "selling_price": 198.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150006037",
+            "deeplink": "https://www.dmart.in/pdp/1463010",
+            "image": "https://cdn.dmart.in/images/products/JAN150006037xx22JAN24_5_P.jpg",
+            "mrp": 450.0,
+            "name": "BECO Natural Laundry Liquid - Front Load",
+            "selling_price": 225.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150002524",
+            "deeplink": "https://www.dmart.in/pdp/1005002",
+            "image": "https://cdn.dmart.in/images/products/FEB150002524xx13FEB22_5_P.jpg",
+            "mrp": 55.0,
+            "name": "Pril Lime Dishwash Liquid",
+            "selling_price": 49.0,
+            "variant": "225 ml"
+        },
+        {
+            "barcode": "150002101",
+            "deeplink": "https://www.dmart.in/pdp/707506",
+            "image": "https://cdn.dmart.in/images/products/FEB150002101xx5FEB24_5_P.jpg",
+            "mrp": 430.0,
+            "name": "Wipro Safewash Top Load Liquid Detergent Pouch",
+            "selling_price": 215.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150002102",
+            "deeplink": "https://www.dmart.in/pdp/707507",
+            "image": "https://cdn.dmart.in/images/products/FEB150002102xx5FEB24_5_P.jpg",
+            "mrp": 490.0,
+            "name": "Wipro Safewash Front Load Liquid Detergent Pouch",
+            "selling_price": 245.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150001345",
+            "deeplink": "https://www.dmart.in/pdp/1616049",
+            "image": "https://cdn.dmart.in/images/products/DEC150001345xx25DEC23_5_P.jpg",
+            "mrp": 125.0,
+            "name": "Reflect Dishwash Liquid",
+            "selling_price": 75.0,
+            "variant": "750 ml"
+        },
+        {
+            "barcode": "150006632",
+            "deeplink": "https://www.dmart.in/pdp/1582463",
+            "image": "https://cdn.dmart.in/images/products/JUN150006632xx6JUN24_5_P.jpg",
+            "mrp": 525.0,
+            "name": "More Light Extra Power Liquid Detergent",
+            "selling_price": 349.0,
+            "variant": "5 L"
+        },
+        {
+            "barcode": "150007189",
+            "deeplink": "https://www.dmart.in/pdp/1616035",
+            "image": "https://cdn.dmart.in/images/products/AUG150007189xx9AUG24_5_P.jpg",
+            "mrp": 445.0,
+            "name": "Beco Natural Dishwash Liquid",
+            "selling_price": 222.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150007608",
+            "deeplink": "https://www.dmart.in/pdp/1640548",
+            "image": "https://cdn.dmart.in/images/products/SEP150007608xx19SEP24_5_P.jpg",
+            "mrp": 225.0,
+            "name": "Godrej Fab Liquid Detergent Pouch",
+            "selling_price": 179.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150006039",
+            "deeplink": "https://www.dmart.in/pdp/1463012",
+            "image": "https://cdn.dmart.in/images/products/JAN150006039xx22JAN24_5_P.jpg",
+            "mrp": 199.0,
+            "name": "BECO Natural Dishwash Liquid",
+            "selling_price": 99.0,
+            "variant": "750 ml"
+        },
+        {
+            "barcode": "150006246",
+            "deeplink": "https://www.dmart.in/pdp/1481029",
+            "image": "https://cdn.dmart.in/images/products/DEC150006246xx20DEC24_5_P.jpg",
+            "mrp": 480.0,
+            "name": "Vim Cooling Freshnes Mint Liquid Dishwash",
+            "selling_price": 298.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150001366",
+            "deeplink": "https://www.dmart.in/pdp/517033",
+            "image": "https://cdn.dmart.in/images/products/KUTENLIQUD750MLPril6xx240621_5_P.jpg",
+            "mrp": 209.0,
+            "name": "Pril Perfect Tamarind Dishwash Liquid",
+            "selling_price": 139.0,
+            "variant": "750 ml"
+        },
+        {
+            "barcode": "150003735",
+            "deeplink": "https://www.dmart.in/pdp/15062",
+            "image": "https://cdn.dmart.in/images/products/FEB150003735xx29FEB24_5_P.jpg",
+            "mrp": 405.0,
+            "name": "Vim Dishwash Liquid Gel - Lemon",
+            "selling_price": 305.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150000377",
+            "deeplink": "https://www.dmart.in/pdp/15062",
+            "image": "https://cdn.dmart.in/images/products/FEB150000377xx29FEB24_5_P.jpg",
+            "mrp": 205.0,
+            "name": "Vim Dishwash Liquid Gel - Lemon",
+            "selling_price": 190.0,
+            "variant": "900 ml"
+        },
+        {
+            "barcode": "150000381",
+            "deeplink": "https://www.dmart.in/pdp/15062",
+            "image": "https://cdn.dmart.in/images/products/FEB150000381xx29FEB24_5_P.jpg",
+            "mrp": 99.0,
+            "name": "Vim Dishwash Liquid Gel - Lemon",
+            "selling_price": 93.0,
+            "variant": "500 ml"
+        },
+        {
+            "barcode": "150000664",
+            "deeplink": "https://www.dmart.in/pdp/15062",
+            "image": "https://cdn.dmart.in/images/products/FEB150000664xx29FEB24_5_P.jpg",
+            "mrp": 20.0,
+            "name": "Vim Dishwash Liquid Gel - Lemon",
+            "selling_price": 18.0,
+            "variant": "115 ml"
+        },
+        {
+            "barcode": "150000378",
+            "deeplink": "https://www.dmart.in/pdp/15063",
+            "image": "https://cdn.dmart.in/images/products/FEB150000378xx29FEB24_5_P.jpg",
+            "mrp": 130.0,
+            "name": "Vim Dishwash Liquid Gel Can - Lemon",
+            "selling_price": 120.0,
+            "variant": "500 ml"
+        },
+        {
+            "barcode": "150000379",
+            "deeplink": "https://www.dmart.in/pdp/15063",
+            "image": "https://cdn.dmart.in/images/products/FEB150000379xx29FEB24_5_P.jpg",
+            "mrp": 205.0,
+            "name": "Vim Dishwash Liquid Gel Can - Lemon",
+            "selling_price": 190.0,
+            "variant": "750 ml"
+        },
+        {
+            "barcode": "150002193",
+            "deeplink": "https://www.dmart.in/pdp/15063",
+            "image": "https://cdn.dmart.in/images/products/FEB150002193xx29FEB24_5_P.jpg",
+            "mrp": 58.0,
+            "name": "Vim Dishwash Liquid Gel Can - Lemon",
+            "selling_price": 53.0,
+            "variant": "250 ml"
+        },
+        {
+            "barcode": "150000946",
+            "deeplink": "https://www.dmart.in/pdp/78036",
+            "image": "https://cdn.dmart.in/images/products/FEB150000946xx6FEB24_5_P.jpg",
+            "mrp": 204.0,
+            "name": "Pril Lime Liquid",
+            "selling_price": 139.0,
+            "variant": "750 ml"
+        },
+        {
+            "barcode": "150000704",
+            "deeplink": "https://www.dmart.in/pdp/78036",
+            "image": "https://cdn.dmart.in/images/products/FEB150000704xx6FEB24_5_P.jpg",
+            "mrp": 475.0,
+            "name": "Pril Lime Liquid",
+            "selling_price": 249.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150001161",
+            "deeplink": "https://www.dmart.in/pdp/367782",
+            "image": "https://cdn.dmart.in/images/products/NOV150001161xx7NOV22_5_P.jpg",
+            "mrp": 199.0,
+            "name": "Giffy Concentrated Dish Wash Gel",
+            "selling_price": 155.0,
+            "variant": "750 ml"
+        },
+        {
+            "barcode": "150006340",
+            "deeplink": "https://www.dmart.in/pdp/715225",
+            "image": "https://cdn.dmart.in/images/products/MAR150006340xx7MAR24_5_P.jpg",
+            "mrp": 405.0,
+            "name": "Giffy Lemon & Active Salt Dish Wash Gel",
+            "selling_price": 202.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150003274",
+            "deeplink": "https://www.dmart.in/pdp/15055",
+            "image": "https://cdn.dmart.in/images/products/DEC150003274xx25DEC23_5_P.jpg",
+            "mrp": 80.0,
+            "name": "Reflect Dishwash Concentrated Gel",
+            "selling_price": 49.0,
+            "variant": "500 ml"
+        },
+        {
+            "barcode": "150000376",
+            "deeplink": "https://www.dmart.in/pdp/15055",
+            "image": "https://cdn.dmart.in/images/products/DEC150000376xx25DEC23_5_P.jpg",
+            "mrp": 150.0,
+            "name": "Reflect Dishwash Concentrated Gel",
+            "selling_price": 90.0,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "150005446",
+            "deeplink": "https://www.dmart.in/pdp/15055",
+            "image": "https://cdn.dmart.in/images/products/JUL150005446xx18JUL23_5_P.jpg",
+            "mrp": 290.0,
+            "name": "Reflect Dishwash Concentrated Gel",
+            "selling_price": 170.0,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "150000223",
+            "deeplink": "https://www.dmart.in/pdp/15013",
+            "image": "https://cdn.dmart.in/images/products/APR150000223xx14APR22_5_P.jpg",
+            "mrp": 155.0,
+            "name": "Revive Liquid Stiffener",
+            "selling_price": 135.0,
+            "variant": "400 g"
+        },
+        {
+            "barcode": "140001615",
+            "deeplink": "https://www.dmart.in/pdp/45758",
+            "image": "https://cdn.dmart.in/images/products/IPANTISEPTIC0Kesh65xx080621_5_P.jpg",
+            "mrp": 461.85,
+            "name": "Dettol Disinfectant Multi-Use Hygiene Liquid",
+            "selling_price": 434.0,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "140000732",
+            "deeplink": "https://www.dmart.in/pdp/45758",
+            "image": "https://cdn.dmart.in/images/products/KOTC200mlDTL770xx080621_5_P.jpg",
+            "mrp": 148.22,
+            "name": "Dettol Disinfectant Multi-Use Hygiene Liquid",
+            "selling_price": 126.0,
+            "variant": "200 ml"
+        },
+        {
+            "barcode": "140000733",
+            "deeplink": "https://www.dmart.in/pdp/45758",
+            "image": "https://cdn.dmart.in/images/products/FEB140000733xx22FEB22_5_P.jpg",
+            "mrp": 256.88,
+            "name": "Dettol Disinfectant Multi-Use Hygiene Liquid",
+            "selling_price": 241.0,
+            "variant": "500 ml"
+        },
+        {
+            "barcode": "140003763",
+            "deeplink": "https://www.dmart.in/pdp/1008001",
+            "image": "https://cdn.dmart.in/images/products/Feb140003763xx17Feb22_5_P.jpg",
+            "mrp": 154.59,
+            "name": "Dettol Antiseptic Liquid",
+            "selling_price": 145.0,
+            "variant": "250 ml"
+        },
+        {
+            "barcode": "140003764",
+            "deeplink": "https://www.dmart.in/pdp/1008001",
+            "image": "https://cdn.dmart.in/images/products/Feb140003764xx17Feb22_5_P.jpg",
+            "mrp": 259.0,
+            "name": "Dettol Antiseptic Liquid",
+            "selling_price": 243.0,
+            "variant": "550 ml"
+        },
+        {
+            "barcode": "140003765",
+            "deeplink": "https://www.dmart.in/pdp/1008001",
+            "image": "https://cdn.dmart.in/images/products/Feb140003765xx17Feb22_5_P.jpg",
+            "mrp": 441.1,
+            "name": "Dettol Antiseptic Liquid",
+            "selling_price": 396.0,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "150000231",
+            "deeplink": "https://www.dmart.in/pdp/15022",
+            "image": "https://cdn.dmart.in/images/products/IDetergents500mlVNSH2592xx030621_5_P.jpg",
+            "mrp": 149.0,
+            "name": "Vanish Liquid Stain Remover",
+            "selling_price": 138.0,
+            "variant": "400 ml"
+        },
+        {
+            "barcode": "150000732",
+            "deeplink": "https://www.dmart.in/pdp/15022",
+            "image": "https://cdn.dmart.in/images/products/KFABRICCARE800mlVNSH3113xx030621_5_P.jpg",
+            "mrp": 265.0,
+            "name": "Vanish Liquid Stain Remover",
+            "selling_price": 238.0,
+            "variant": "800 ml"
+        },
+        {
+            "barcode": "150002942",
+            "deeplink": "https://www.dmart.in/pdp/829501",
+            "image": "https://cdn.dmart.in/images/products/NOV150002942xx7NOV22_5_P.jpg",
+            "mrp": 235.0,
+            "name": "Wipro Softouch Fabric Conditioner",
+            "selling_price": 180.0,
+            "variant": "800 ml"
+        },
+        {
+            "barcode": "150002925",
+            "deeplink": "https://www.dmart.in/pdp/820781",
+            "image": "https://cdn.dmart.in/images/products/MAR150002925xx17MAR22_5_P.jpg",
+            "mrp": 65.0,
+            "name": "Star Light Fabric Whitener",
+            "selling_price": 32.0,
+            "variant": "500 ml"
+        }
+    ],
+    "instamart_products": [
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/10/25/daf7eea7-aa23-417f-8375-8b268a333668_67028_1.png",
+            "mrp": 490.0,
+            "name": "Henko Matic Front Load Liquid Detergent Refill Pouch - Super saver pack",
+            "price_normalized": null,
+            "selling_price": 366.0,
+            "super_saver_selling_price": null,
+            "variant": "2 ltr"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/10/25/5d195a19-09c8-4e9c-b9a1-a3b99dc215e7_50718_1.png",
+            "mrp": 430.0,
+            "name": "Henko Matic Top Load Liquid Detergent Refill Pouch - Super saver pack",
+            "price_normalized": null,
+            "selling_price": 344.0,
+            "super_saver_selling_price": null,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/5/3/2b41382c-c173-4907-87d3-e2791fe595fa_laundrydetergents_RHGYBHG3HK_MN.png",
+            "mrp": 300.0,
+            "name": "Rin Matic Top Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 200.0,
+            "super_saver_selling_price": null,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/6/21/06a5fa59-985b-4a5f-9159-caec1d94cc09_laundrydetergents_GVQX0UDLVJ_MN.png",
+            "mrp": 225.0,
+            "name": "Godrej Fab Liquid Detergent Refill Pouch for Machine & Bucket Wash",
+            "price_normalized": null,
+            "selling_price": 191.0,
+            "super_saver_selling_price": null,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/48c7489300cc58c603df3b6f5fb958f4",
+            "mrp": 220.0,
+            "name": "Beco Top Load Liquid Detergent Coconut Based Surfactants With Lavender And Vanilla",
+            "price_normalized": null,
+            "selling_price": 128.0,
+            "super_saver_selling_price": null,
+            "variant": "1000 ml"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2025/3/17/840f59d4-a645-4176-bf80-eaf1acbcbada_9719_1.png",
+            "mrp": 319.0,
+            "name": "Surf Excel Matic Liquid Detergent Top Load Pouch",
+            "price_normalized": null,
+            "selling_price": 226.0,
+            "super_saver_selling_price": null,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2025/3/17/1e9dfdeb-e341-4923-92b9-0ee01e77679c_6269_1.png",
+            "mrp": 255.0,
+            "name": "Surf Excel Matic Front Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 255.0,
+            "super_saver_selling_price": null,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/7/24/c5809559-0d34-4df7-a730-868112da000e_laundrydetergents_3RC967MFBR_MN.png",
+            "mrp": 230.0,
+            "name": "Home Truths Matic Liquid Detergent Top Load",
+            "price_normalized": null,
+            "selling_price": 150.0,
+            "super_saver_selling_price": null,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2025/1/9/f3315b39-de2a-4dbb-84d3-d56c7f723843_877317_1.png",
+            "mrp": 245.0,
+            "name": "Jet Klin 1L Matic Liquid Detergent Front Load",
+            "price_normalized": null,
+            "selling_price": 119.0,
+            "super_saver_selling_price": null,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/7/24/7f605b8c-46cc-492c-a40b-fd1fc818e74e_laundrydetergents_VYX93VYTGA_MN.png",
+            "mrp": 230.0,
+            "name": "Home Truths Matic Liquid Detergent Front Load",
+            "price_normalized": null,
+            "selling_price": 172.0,
+            "super_saver_selling_price": null,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2025/3/11/c9e516c1-049e-4313-b409-63857496d46b_690080_1.png",
+            "mrp": 215.0,
+            "name": "Jet Klin Matic Liquid Detergent (1L, White)",
+            "price_normalized": null,
+            "selling_price": 109.0,
+            "super_saver_selling_price": null,
+            "variant": "1 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/69520f55e3c5a8e7e0a017948c84084a",
+            "mrp": 120.0,
+            "name": "Ujala Front Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 114.0,
+            "super_saver_selling_price": null,
+            "variant": "800 ml"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2025/1/9/ae8826b5-c646-42e0-8288-86b193ca0853_680859_1.png",
+            "mrp": 192.0,
+            "name": "Jet Klin Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 79.0,
+            "super_saver_selling_price": null,
+            "variant": "860 ml"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2025/3/28/0d0758cf-d9aa-4956-837b-20a8081d94ac_83826_1.png",
+            "mrp": 99.0,
+            "name": "Godrej Fab Liquid Detergent Refill Pouch for Machine & Hand Wash",
+            "price_normalized": null,
+            "selling_price": 99.0,
+            "super_saver_selling_price": null,
+            "variant": "950 ml"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/xms0cr7tady6lxgzgggw",
+            "mrp": 120.0,
+            "name": "Godrej Ezee Liquid Detergent for Winter Wear with added Fabric Conditioner, No Soda",
+            "price_normalized": null,
+            "selling_price": 120.0,
+            "super_saver_selling_price": null,
+            "variant": "500 g"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/9/27/06065fe8-af59-473e-a2b7-9a33365b35bb_589781.png",
+            "mrp": 302.0,
+            "name": "Jet Klin Liquid detergents + Jet Klin Detergent Powder Lemon",
+            "price_normalized": null,
+            "selling_price": 134.0,
+            "super_saver_selling_price": null,
+            "variant": "1 combo"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/416454b96df62604aaae0ddc5ba104c4",
+            "mrp": 430.0,
+            "name": "Safewash Matic Top Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 215.0,
+            "super_saver_selling_price": null,
+            "variant": "2 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/3/28/b205c2ee-20aa-4dbc-9b2d-9fe497f7b72e_laundrydetergents_2XG7KS6WQF_MN.png",
+            "mrp": 715.0,
+            "name": "Surf Excel Matic Front Load Liquid Detergent",
+            "price_normalized": null,
+            "selling_price": 515.0,
+            "super_saver_selling_price": null,
+            "variant": "3.2 L"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/12/12/a537fb57-0387-40f0-b03e-059c5cf4f8a6_862543_1.png",
+            "mrp": 120.0,
+            "name": "Rinsl Liquid Detergent- Expert Stain Cleaner and Cloth Brightener - 450ml",
+            "price_normalized": null,
+            "selling_price": 120.0,
+            "super_saver_selling_price": null,
+            "variant": "450 ml"
+        },
+        {
+            "barcode": "",
+            "deeplink": "",
+            "image": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_152/NI_CATALOG/IMAGES/CIW/2024/5/28/9a77f20a-64a4-4b73-a8e1-c743c363c0c4_laundrydetergents_WBP8LNDT3V_MN.png",
+            "mrp": 885.0,
+            "name": "Surf Excel Matic Front Load Liquid Detergent Refill Pouch",
+            "price_normalized": null,
+            "selling_price": 589.0,
+            "super_saver_selling_price": null,
+            "variant": "4 L"
+        }
+    ],
+    "zepto_products": []
+}
