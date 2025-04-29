@@ -252,9 +252,9 @@ def search_all_platforms():
     with ThreadPoolExecutor(max_workers=4) as executor:
         logging.info("Submitting tasks to executor...")
         # Submit tasks: DMart direct, others via 9minutes helper
-        future_instamart = executor.submit(search_instamart_products, query, pincode)
-        future_zepto = executor.submit(search_zepto_products, query, pincode)
-        future_blinkit = executor.submit(search_blinkit_products, query, pincode)
+        future_instamart = executor.submit(search_instamart_products, query, "500032" if pincode == "500049" else pincode)
+        future_zepto = executor.submit(search_zepto_products, query, "500032" if pincode == "500049" else pincode)
+        future_blinkit = executor.submit(search_blinkit_products, query, "500032" if pincode == "500049" else pincode)
         future_dmart = executor.submit(search_dmart_products, query, pincode)
         future_jiomart = executor.submit(search_jiomart_products, query, pincode)
         logging.info("Tasks submitted.")
