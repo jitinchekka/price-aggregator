@@ -304,7 +304,10 @@ def search_all_platforms():
     logging.info(f"--- Request End ---")
 
     return jsonify(final_response)
-
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
 # --- Main Execution ---
 if __name__ == '__main__':
     print("Starting Flask Aggregator API...")
