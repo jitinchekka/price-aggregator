@@ -46,11 +46,14 @@ def get_dmart_store_id(pincode):
          return None
 
 def search_dmart_products(query, pincode):
+    """
+    Searches DMart and normalizes the response, using the CORRECTED image URL structure.
+    """
     dmart_results = []
     store_id = get_dmart_store_id(pincode)
     if not store_id:
         logging.warning("[DMart] Could not get store ID. Skipping DMart search.")
-        return dmart_results
+        return dmart_results # Return empty list
 
     encoded_query = urllib.parse.quote(query)
     search_url = f"https://digital.dmart.in/api/v3/search/{encoded_query}?storeId={store_id}"
@@ -63,6 +66,7 @@ def search_dmart_products(query, pincode):
         response = requests.get(search_url, headers=search_headers, timeout=REQUEST_TIMEOUT)
         response.raise_for_status()
         data = response.json()
+
         raw_product_list = data.get("products", [])
         logging.info(f"[DMart] Received response. Found {len(raw_product_list)} product entries.")
 
@@ -70,43 +74,64 @@ def search_dmart_products(query, pincode):
             parent_name = product_item.get("name")
             target_url_path = product_item.get("targetUrl")
             full_product_url = f"{DMART_BASE_URL}{target_url_path}" if target_url_path else None
-            skus = product_item.get("sKUs", [])
 
+            skus = product_item.get("sKUs", [])
             for sku_item in skus:
                 try:
                     if sku_item.get("buyable") != "true" or sku_item.get("invType") == "OOS":
-                        continue
+                        continue # Skip non-buyable or OOS items
+
                     mrp_str = sku_item.get("priceMRP")
                     selling_price_str = sku_item.get("priceSALE")
                     variant = sku_item.get("variantTextValue")
-                    image_key = sku_item.get("productImageKey", sku_item.get("imageKey"))
-                    image_url = f"{DMART_IMAGE_BASE}placeholder/{image_key}-b.jpg" if image_key else None # Placeholder URL
-                    barcode = sku_item.get("articleNumber")
+                    # --- Corrected Image URL Logic ---
+                    product_image_key = sku_item.get("productImageKey")
+                    img_code = sku_item.get("imgCode")
+                    image_url = None # Default to None
+                    if product_image_key and img_code:
+                        image_url = f"https://cdn.dmart.in/images/products/{product_image_key}_{img_code}_P.jpg"
+                    else:
+                        # Fallback or log warning if key components are missing
+                        image_key_fallback = sku_item.get("imageKey") # Check fallback
+                        if image_key_fallback and img_code:
+                             image_url = f"https://cdn.dmart.in/images/products/{image_key_fallback}_{img_code}_P.jpg"
+                             logging.debug(f"[DMart] Used fallback imageKey for SKU {sku_item.get('skuUniqueID')}")
+                        else:
+                            logging.warning(f"[DMart] Missing productImageKey or imgCode for SKU {sku_item.get('skuUniqueID')}. Cannot construct image URL.")
+                    # --- End Corrected Image URL Logic ---
+
+                    barcode = sku_item.get("articleNumber") # Use articleNumber as potential barcode/EAN
 
                     if parent_name and mrp_str and selling_price_str:
+                        # Normalize data to target structure
                         normalized_product = {
                             "name": parent_name,
                             "mrp": float(mrp_str) if mrp_str else None,
                             "selling_price": float(selling_price_str) if selling_price_str else None,
-                            "image": image_url,
+                            "image": image_url, # Use the constructed URL
                             "variant": variant,
-                            "barcode": barcode or "",
-                            "deeplink": full_product_url or ""
+                            "barcode": barcode or "", # Ensure string, default empty
+                            "deeplink": full_product_url or "" # Ensure string, default empty
                         }
                         dmart_results.append(normalized_product)
+
                 except (ValueError, TypeError) as e:
                     logging.error(f"[DMart] Error converting price for SKU {sku_item.get('skuUniqueID')}: {e}")
                     continue
                 except Exception as e:
                     logging.error(f"[DMart] Error parsing one SKU item: {e} - SKU: {sku_item}")
                     continue
+
         logging.info(f"[DMart] Successfully normalized {len(dmart_results)} SKUs.")
+
+    # Basic exception handling for the request
     except requests.exceptions.RequestException as e:
         logging.error(f"[DMart] API call failed: {e}")
     except json.JSONDecodeError:
         logging.error("[DMart] Failed to decode JSON response.")
     except Exception as e:
          logging.error(f"[DMart] An unexpected error occurred: {e}")
+
     return dmart_results
 
 # --- Functions using 9minutes.in API ---
